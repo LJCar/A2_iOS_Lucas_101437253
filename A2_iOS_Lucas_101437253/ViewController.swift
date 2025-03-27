@@ -8,13 +8,23 @@
 import UIKit
 import CoreData
 
-class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
     
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
     
     var productList: [NSManagedObject] = []
     
+    var filteredProducts: [NSManagedObject] = []
+    var isSearching = false
+    
     @IBOutlet weak var tableView: UITableView!
+    
+    @IBOutlet weak var searchBar: UISearchBar!
+    
+    @IBAction func searchButtonTapped(_ sender: UIBarButtonItem) {
+        searchBar.isHidden = false
+        searchBar.becomeFirstResponder()
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,6 +32,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         tableView.delegate = self
         tableView.dataSource = self
+        searchBar.delegate = self
+        searchBar.isHidden = true
         
         
         
@@ -69,13 +81,13 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return productList.count
+        return isSearching ? filteredProducts.count : productList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ProductCell", for: indexPath)
         
-        let product = productList[indexPath.row]
+        let product = isSearching ? filteredProducts[indexPath.row] : productList[indexPath.row]
         let name = product.value(forKey: "name") as? String ?? "No Product Name"
         let desc = product.value(forKey: "desc") as? String ?? "No Description"
         
@@ -84,6 +96,28 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         cell.detailTextLabel?.text = "Product Description: \(desc)"
         
         return cell
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if searchText.isEmpty{
+            isSearching = false
+        } else {
+            isSearching = true
+            filteredProducts = productList.filter {
+                let name = ($0.value(forKey: "name") as? String ?? "").lowercased()
+                let desc = ($0.value(forKey: "desc") as? String ?? "").lowercased()
+                return name.contains(searchText.lowercased()) || desc.contains(searchText.lowercased())
+            }
+        }
+        tableView.reloadData()
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.text = ""
+        searchBar.resignFirstResponder()
+        searchBar.isHidden = true
+        isSearching = false
+        tableView.reloadData()
     }
 
 }

@@ -47,15 +47,28 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <searchBar hidden="YES" contentMode="redraw" fixedFrame="YES" placeholder="Search for Product" showsCancelButton="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fa9-w9-dO6">
+                                <rect key="frame" x="0.0" y="103" width="393" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="I1y-Uu-B9X"/>
+                                </connections>
+                            </searchBar>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                     <navigationItem key="navigationItem" id="Tfn-Th-IlV">
                         <barButtonItem key="leftBarButtonItem" title="add product" image="plus" catalog="system" id="Hh0-at-RDH"/>
-                        <barButtonItem key="rightBarButtonItem" title="search" image="magnifyingglass" catalog="system" id="eIg-an-krC"/>
+                        <barButtonItem key="rightBarButtonItem" title="search" image="magnifyingglass" catalog="system" id="eIg-an-krC">
+                            <connections>
+                                <action selector="searchButtonTapped:" destination="BYZ-38-t0r" id="344-kg-XMK"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="searchBar" destination="fa9-w9-dO6" id="xrx-1s-2BN"/>
                         <outlet property="tableView" destination="YZZ-s6-RdY" id="7iP-nQ-Cad"/>
                     </connections>
                 </viewController>
