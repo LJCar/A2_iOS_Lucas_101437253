@@ -8,13 +8,22 @@
 import UIKit
 import CoreData
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
-
+    
+    var productList: [NSManagedObject] = []
+    
+    @IBOutlet weak var tableView: UITableView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        
+        tableView.delegate = self
+        tableView.dataSource = self
+        
+        
         
         let context = appDelegate.persistentContainer.viewContext
         
@@ -47,12 +56,35 @@ class ViewController: UIViewController {
                 
                 try context.save()
                 print("Products Inserted.")
-            } else {
-                print("Ready for new Products")
+            }
+            let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Product")
+            fetchRequest.sortDescriptors = [NSSortDescriptor(key: "id", ascending: true)]
+            if let results = try? context.fetch(fetchRequest) as? [NSManagedObject] {
+                productList = results
+                tableView.reloadData()
             }
         } catch {
             print("Error loading Products: \(error)")
         }
     }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return productList.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "ProductCell", for: indexPath)
+        
+        let product = productList[indexPath.row]
+        let name = product.value(forKey: "name") as? String ?? "No Product Name"
+        let desc = product.value(forKey: "desc") as? String ?? "No Description"
+        
+        cell.textLabel?.text = "Product Name: \(name)"
+        cell.textLabel?.textColor = UIColor.systemBlue
+        cell.detailTextLabel?.text = "Product Description: \(desc)"
+        
+        return cell
+    }
+
 }
 
