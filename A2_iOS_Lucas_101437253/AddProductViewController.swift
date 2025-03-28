@@ -31,10 +31,20 @@ class AddProductViewController: UIViewController {
             let desc = productDescField.text, !desc.isEmpty,
             let priceString = productPriceField.text, !priceString.isEmpty,
             let provider = productProviderField.text, !provider.isEmpty
-        else { return
+        else {
+            let alert = UIAlertController(title: "Error", message: "Please fill out all fields before saving the product", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default))
+            present(alert, animated: true)
+            return
         }
         
         let price = NSDecimalNumber(string: priceString)
+        if price == NSDecimalNumber.notANumber {
+            let alert = UIAlertController(title: "Invalid Price", message: "Please enter a valid number for the price.", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default))
+            present(alert, animated: true)
+            return
+        }
         
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let context = appDelegate.persistentContainer.viewContext
