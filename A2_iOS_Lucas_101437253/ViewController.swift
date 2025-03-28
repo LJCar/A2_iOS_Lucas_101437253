@@ -119,6 +119,21 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         isSearching = false
         tableView.reloadData()
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        let context = appDelegate.persistentContainer.viewContext
+        let products = NSFetchRequest<NSFetchRequestResult>(entityName: "Product")
+        products.sortDescriptors = [NSSortDescriptor(key: "id", ascending: true)]
+        do {
+            if let results = try context.fetch(products) as? [NSManagedObject] {
+                productList = results
+                tableView.reloadData()
+            }
+        } catch {
+            print("Error loading Products: \(error)")
+        }
+    }
 
 }
 

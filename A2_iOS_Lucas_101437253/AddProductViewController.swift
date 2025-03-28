@@ -79,10 +79,12 @@ class AddProductViewController: UIViewController {
             productProviderField.text = ""
             
             let alert = UIAlertController(title: "Success", message: "Product Saved!", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "OK", style: .default){ _ in self.navigationController?.popViewController(animated: true)
-            })
+            alert.addAction(UIAlertAction(title: "OK", style: .default))
             present(alert, animated: true)
         } catch {
+            let alert = UIAlertController(title: "Failed", message: "A error has occured Product was not saved", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default))
+            present(alert, animated: true)
             print("Failed to Save: \(error)")
         }
     }
