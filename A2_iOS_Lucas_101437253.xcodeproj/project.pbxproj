@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		183029D82D961CAE00AE6E12 /* AddProductViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 183029D72D961CAE00AE6E12 /* AddProductViewController.swift */; };
 		18D2E4932D94C63400D4DA62 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D2E4922D94C63400D4DA62 /* AppDelegate.swift */; };
 		18D2E4952D94C63400D4DA62 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D2E4942D94C63400D4DA62 /* SceneDelegate.swift */; };
 		18D2E4972D94C63400D4DA62 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D2E4962D94C63400D4DA62 /* ViewController.swift */; };
@@ -17,6 +18,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		183029D72D961CAE00AE6E12 /* AddProductViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProductViewController.swift; sourceTree = "<group>"; };
 		18D2E48F2D94C63400D4DA62 /* A2_iOS_Lucas_101437253.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = A2_iOS_Lucas_101437253.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		18D2E4922D94C63400D4DA62 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		18D2E4942D94C63400D4DA62 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -62,6 +64,7 @@
 				18D2E4942D94C63400D4DA62 /* SceneDelegate.swift */,
 				18D2E4962D94C63400D4DA62 /* ViewController.swift */,
 				18D2E4982D94C63400D4DA62 /* Main.storyboard */,
+				183029D72D961CAE00AE6E12 /* AddProductViewController.swift */,
 				18D2E49E2D94C63600D4DA62 /* Assets.xcassets */,
 				18D2E4A02D94C63600D4DA62 /* LaunchScreen.storyboard */,
 				18D2E4A32D94C63600D4DA62 /* Info.plist */,
@@ -143,6 +146,7 @@
 			files = (
 				18D2E49D2D94C63400D4DA62 /* A2_iOS_Lucas_101437253.xcdatamodeld in Sources */,
 				18D2E4972D94C63400D4DA62 /* ViewController.swift in Sources */,
+				183029D82D961CAE00AE6E12 /* AddProductViewController.swift in Sources */,
 				18D2E4932D94C63400D4DA62 /* AppDelegate.swift in Sources */,
 				18D2E4952D94C63400D4DA62 /* SceneDelegate.swift in Sources */,
 			);
